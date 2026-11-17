@@ -1,0 +1,123 @@
+{
+    "usuarios": [
+        {
+            "id": "1",
+            "nome": "Usuária de demonstração",
+            "email": "demo@bonvoy.com",
+            "senha": "123456"
+        }
+    ],
+    "pacotes": [
+        {
+            "id": "1",
+            "titulo": "Fernando de Noronha",
+            "destino": "Fernando de Noronha",
+            "descricao": "Conheça as praias paradisíacas de Fernando de Noronha em um pacote com hospedagem, transporte e passeios.",
+            "imagem": "https://images.unsplash.com/photo-1544551763-46a013bb70d5",
+            "preco": 4990,
+            "duracao": 5,
+            "hospedagem": "Pousada inclusa",
+            "transporte": "Aéreo (ida e volta)"
+        },
+        {
+            "id": "2",
+            "titulo": "Grécia",
+            "destino": "Grécia",
+            "descricao": "Explore as ilhas gregas, as casas brancas e as paisagens à beira-mar.",
+            "imagem": "https://images.unsplash.com/photo-1533105079780-92b9be482077",
+            "preco": 9390,
+            "duracao": 4,
+            "hospedagem": "Hotel em Santorini",
+            "transporte": "Aéreo (ida e volta)"
+        },
+        {
+            "id": "3",
+            "titulo": "Londres",
+            "destino": "Londres",
+            "descricao": "Explore os principais pontos turísticos de Londres, como a Tower Bridge, o Big Ben e o Palácio de Buckingham.",
+            "imagem": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad",
+            "preco": 11490,
+            "duracao": 6,
+            "hospedagem": "Hotel com café da manhã",
+            "transporte": "Aéreo (ida e volta)"
+        },
+        {
+            "id": "4",
+            "titulo": "Rio de Janeiro",
+            "destino": "Rio de Janeiro",
+            "descricao": "Aproveite as praias de Copacabana e Ipanema e visite o Cristo Redentor e o Pão de Açúcar.",
+            "imagem": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325",
+            "preco": 3290,
+            "duracao": 4,
+            "hospedagem": "Hotel em Copacabana",
+            "transporte": "Aéreo (ida e volta)"
+        },
+        {
+            "id": "5",
+            "titulo": "Buenos Aires",
+            "destino": "Buenos Aires",
+            "descricao": "Conheça os bairros, cafés, praças e atrações culturais da capital argentina.",
+            "imagem": "https://images.unsplash.com/photo-1589909202802-8f4aadce1849",
+            "preco": 4290,
+            "duracao": 5,
+            "hospedagem": "Hotel com café da manhã",
+            "transporte": "Aéreo (ida e volta)"
+        },
+        {
+            "id": "6",
+            "titulo": "Salvador",
+            "destino": "Salvador",
+            "descricao": "Visite o Pelourinho, conheça a cultura baiana e aproveite as praias da cidade.",
+            "imagem": "https://images.unsplash.com/photo-1547995886-6dc09384c6e6",
+            "preco": 2890,
+            "duracao": 4,
+            "hospedagem": "Pousada no centro histórico",
+            "transporte": "Aéreo (ida e volta)"
+        },
+        {
+            "id": "7",
+            "titulo": "Paris",
+            "destino": "Paris",
+            "descricao": "Descubra os museus, monumentos e cafés da capital francesa, incluindo a Torre Eiffel.",
+            "imagem": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a",
+            "preco": 10490,
+            "duracao": 6,
+            "hospedagem": "Hotel próximo ao centro",
+            "transporte": "Aéreo (ida e volta)"
+        },
+        {
+            "id": "8",
+            "titulo": "Foz do Iguaçu",
+            "destino": "Foz do Iguaçu",
+            "descricao": "Conheça as Cataratas do Iguaçu, o Parque das Aves e outros pontos da região.",
+            "imagem": "https://images.unsplash.com/photo-1619951405956-4f9f8c7e34b5",
+            "preco": 2590,
+            "duracao": 3,
+            "hospedagem": "Hotel com café da manhã",
+            "transporte": "Aéreo (ida e volta)"
+        },
+        {
+            "id": "9",
+            "titulo": "Orlando",
+            "destino": "Orlando",
+            "descricao": "Aproveite os parques temáticos e as atrações de Orlando em uma viagem em família.",
+            "imagem": "https://images.unsplash.com/photo-1577717903315-1691ae25ab3f",
+            "preco": 12490,
+            "duracao": 7,
+            "hospedagem": "Hotel próximo aos parques",
+            "transporte": "Aéreo (ida e volta)"
+        },
+        {
+            "id": "10",
+            "titulo": "Maceió",
+            "destino": "Maceió",
+            "descricao": "Relaxe nas praias de águas claras e conheça as piscinas naturais da região.",
+            "imagem": "https://images.unsplash.com/photo-1519046904884-53103b34b206",
+            "preco": 3690,
+            "duracao": 5,
+            "hospedagem": "Hotel à beira-mar",
+            "transporte": "Aéreo (ida e volta)"
+        }
+    ],
+    "$schema": "./node_modules/json-server/schema.json"
+}
