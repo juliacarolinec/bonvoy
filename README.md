@@ -1,59 +1,53 @@
-# Bonvoy
+# BonVoy
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.42.
+Aplicação web para consultar e gerenciar pacotes de viagem. Projeto acadêmico da disciplina Desenvolvimento Web Front-End, do curso de Ciência da Computação da Universidade FUMEC.
 
-## Development server
+## Tecnologias
 
-To start a local development server, run:
+- Angular
+- TypeScript
+- JSON-Server
+- Bootstrap 5
 
-```bash
-ng serve
-```
+## Funcionalidades em desenvolvimento
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Listagem dos pacotes cadastrados
+- Busca de pacotes por destino
+- Visualização dos detalhes de um pacote
+- Exclusão de um pacote com confirmação
+- Cadastro e edição de pacotes
+- Login e página inicial
 
-## Code scaffolding
+## Como executar
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+É necessário ter Node.js e npm instalados. Na primeira vez, abra o terminal na pasta do projeto e instale as dependências:
 
 ```bash
-ng build
+npm install
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Inicie a API em um terminal:
 
 ```bash
-ng test
+npm run api
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+Deixe esse terminal aberto. Em outro terminal, ainda na pasta do projeto, inicie o Angular:
 
 ```bash
-ng e2e
+ng serve -o
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+A aplicação será aberta em `http://localhost:4200`. A API do JSON-Server fica em `http://localhost:3000`. Os dados de demonstração ficam no arquivo `db.json`. A coleção de pacotes pode ser consultada em `http://localhost:3000/pacotes`.
 
-## Additional Resources
+## Campos dos pacotes
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Cada pacote possui `id`, `titulo`, `destino`, `descricao`, `imagem`, `preco`, `duracao`, `hospedagem` e `transporte`.
+
+## Divisão do trabalho
+
+Júlia ficará responsável pela listagem, pelos detalhes e pela exclusão dos pacotes. Ana Paula ficará responsável pelo cadastro e pela edição. Mariana ficará responsável pelo login, pela página inicial e pela integração das rotas. A parte visual em CSS será desenvolvida em grupo.
+
+## Observação
+
+Os dados cadastrados, editados ou excluídos pelo JSON-Server são gravados em `db.json`. Antes de compartilhar alterações no Git, confira esse arquivo para evitar enviar dados de teste sem querer.
