@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Pacote } from '../models/pacote';
+import { DadosPacote, Pacote } from '../models/pacote';
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +19,7 @@ export class PacoteService {
         return this.http.get<Pacote>(`${this.apiUrl}/${id}`);
     }
 
-    cadastrar(pacote: Pacote): Observable<Pacote> {
+    cadastrar(pacote: DadosPacote): Observable<Pacote> {
         return this.http.post<Pacote>(this.apiUrl, pacote);
     }
 

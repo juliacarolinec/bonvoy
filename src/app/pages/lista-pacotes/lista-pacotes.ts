@@ -10,6 +10,7 @@ import { PacoteService } from '../../services/pacote.service';
     imports: [CommonModule, RouterLink],
     template: `
     <h1>Pacotes de viagens</h1>
+    <p><a routerLink="/pacotes/novo">Cadastrar pacote</a></p>
 
     <label for="busca">Buscar por destino:</label>
     <input
@@ -34,6 +35,7 @@ import { PacoteService } from '../../services/pacote.service';
       <p>{{ pacote.preco | currency:'BRL' }}</p>
 
       <a [routerLink]="['/pacotes', pacote.id]">Ver detalhes</a>
+      <a [routerLink]="['/pacotes', pacote.id, 'editar']">Editar</a>
 
       <button type="button" (click)="excluir(pacote)">
         Excluir
