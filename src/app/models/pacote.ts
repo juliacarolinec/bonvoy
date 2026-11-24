@@ -9,3 +9,5 @@ export interface Pacote {
     hospedagem: string;
     transporte: string;
 }
+
+export type DadosPacote = Omit<Pacote, 'id'>;
