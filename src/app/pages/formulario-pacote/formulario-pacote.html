@@ -1,113 +1,254 @@
-<section class="container py-4" aria-labelledby="titulo-pagina">
+<header class="formulario-cabecalho">
+  <a class="marca" routerLink="/" aria-label="Planeje, página inicial">
+    <span class="marca-icone" aria-hidden="true">&#9992;&#65038;</span>
+    Planeje
+  </a>
+
+  <nav aria-label="Navegação principal">
+    <a routerLink="/">Home</a>
+    <a routerLink="/pacotes" [class.ativo]="editando">Pacotes</a>
+    <a
+      routerLink="/pacotes/novo"
+      [class.ativo]="!editando"
+      [attr.aria-current]="editando ? null : 'page'"
+    >
+      Cadastrar
+    </a>
+  </nav>
+
+  <button class="perfil" type="button" disabled title="O perfil ficará disponível com o login">
+    Perfil
+  </button>
+</header>
+
+<section class="formulario-conteudo" aria-labelledby="titulo-pagina">
   <h1 id="titulo-pagina">{{ editando ? 'Editar pacote' : 'Cadastrar Novo Pacote' }}</h1>
 
   @if (carregando()) {
     <p role="status">Carregando pacote…</p>
   } @else if (erroCarregamento()) {
-    <p class="alert alert-danger" role="alert">{{ erroCarregamento() }}</p>
+    <p class="mensagem mensagem-erro" role="alert">{{ erroCarregamento() }}</p>
     <a routerLink="/pacotes">Voltar aos pacotes</a>
   } @else {
     @if (pacoteSalvo(); as pacote) {
-      <div class="alert alert-success" role="status">
+      <div class="mensagem mensagem-sucesso" role="status">
         {{ editando ? 'Alterações salvas com sucesso.' : 'Pacote cadastrado com sucesso.' }}
         @if (!editando) {
           <a [routerLink]="['/pacotes', pacote.id, 'editar']">Editar pacote cadastrado</a>
         }
-        <a class="ms-2" routerLink="/pacotes">Voltar aos pacotes</a>
+        <a routerLink="/pacotes">Voltar aos pacotes</a>
       </div>
     }
 
     <form [formGroup]="formulario" (ngSubmit)="salvar()" novalidate>
       <fieldset [disabled]="salvando()" [attr.aria-busy]="salvando()">
-        <div class="row g-3">
-          <div class="col-12 col-md-6">
-            <div class="mb-3">
-              <label class="form-label" for="titulo">Título do pacote *</label>
-              <input class="form-control" id="titulo" formControlName="titulo" type="text"
-                placeholder="Ex. Praias de Maceió" required
+        <div class="formulario-colunas">
+          <div class="formulario-coluna">
+            <div>
+              <label class="form-label" for="titulo"
+                >Título do pacote <span [hidden]="editando" aria-hidden="true">*</span></label
+              >
+              <input
+                class="form-control"
+                id="titulo"
+                formControlName="titulo"
+                type="text"
+                placeholder="Ex. Praias de Maceió"
+                required
                 [class.is-invalid]="campoInvalido('titulo')"
-                [attr.aria-describedby]="campoInvalido('titulo') ? 'titulo-erro' : null" />
-              <ng-container *ngTemplateOutlet="erroCampo; context: { campo: 'titulo', mensagem: 'Informe o título do pacote.' }" />
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label" for="destino">Destino *</label>
-              <input class="form-control" id="destino" formControlName="destino" type="text"
-                placeholder="Ex. Maceió - AL" required
-                [class.is-invalid]="campoInvalido('destino')"
-                [attr.aria-describedby]="campoInvalido('destino') ? 'destino-erro' : null" />
-              <ng-container *ngTemplateOutlet="erroCampo; context: { campo: 'destino', mensagem: 'Informe o destino.' }" />
+                [attr.aria-invalid]="campoInvalido('titulo')"
+                [attr.aria-describedby]="campoInvalido('titulo') ? 'titulo-erro' : null"
+              />
+              <ng-container
+                *ngTemplateOutlet="
+                  erroCampo;
+                  context: { campo: 'titulo', mensagem: 'Informe o título do pacote.' }
+                "
+              />
             </div>
 
             <div>
-              <label class="form-label" for="descricao">Descrição *</label>
-              <textarea class="form-control" id="descricao" formControlName="descricao" rows="4"
-                placeholder="Descreva o pacote" required
+              <label class="form-label" for="destino"
+                >Destino <span [hidden]="editando" aria-hidden="true">*</span></label
+              >
+              <input
+                class="form-control"
+                id="destino"
+                formControlName="destino"
+                type="text"
+                placeholder="Ex. Maceió - AL"
+                required
+                [class.is-invalid]="campoInvalido('destino')"
+                [attr.aria-invalid]="campoInvalido('destino')"
+                [attr.aria-describedby]="campoInvalido('destino') ? 'destino-erro' : null"
+              />
+              <ng-container
+                *ngTemplateOutlet="
+                  erroCampo;
+                  context: { campo: 'destino', mensagem: 'Informe o destino.' }
+                "
+              />
+            </div>
+
+            <div>
+              <label class="form-label" for="descricao"
+                >Descrição <span [hidden]="editando" aria-hidden="true">*</span></label
+              >
+              <textarea
+                class="form-control"
+                id="descricao"
+                formControlName="descricao"
+                rows="4"
+                placeholder="Descreva o pacote"
+                required
                 [class.is-invalid]="campoInvalido('descricao')"
-                [attr.aria-describedby]="campoInvalido('descricao') ? 'descricao-erro' : null"></textarea>
-              <ng-container *ngTemplateOutlet="erroCampo; context: { campo: 'descricao', mensagem: 'Descreva o pacote.' }" />
+                [attr.aria-invalid]="campoInvalido('descricao')"
+                [attr.aria-describedby]="campoInvalido('descricao') ? 'descricao-erro' : null"
+              ></textarea>
+              <ng-container
+                *ngTemplateOutlet="
+                  erroCampo;
+                  context: { campo: 'descricao', mensagem: 'Descreva o pacote.' }
+                "
+              />
             </div>
           </div>
 
-          <div class="col-12 col-md-6">
-            <div class="row g-3">
-              <div class="col-12 col-sm-6">
-                <label class="form-label" for="preco">Preço (R$) *</label>
-                <input class="form-control" id="preco" formControlName="preco" type="text"
-                  inputmode="decimal" placeholder="Ex. 2.500,00" required
-                  [class.is-invalid]="campoInvalido('preco')"
-                  [attr.aria-describedby]="campoInvalido('preco') ? 'preco-erro' : null" />
-                <ng-container *ngTemplateOutlet="erroCampo; context: { campo: 'preco', mensagem: 'Informe um preço maior que zero em reais.' }" />
-              </div>
+          <div class="formulario-coluna formulario-coluna-direita">
+            <div>
+              <label class="form-label" for="preco"
+                >Preço (R$) <span [hidden]="editando" aria-hidden="true">*</span></label
+              >
+              <input
+                class="form-control"
+                id="preco"
+                formControlName="preco"
+                type="text"
+                inputmode="decimal"
+                placeholder="Ex. 2.500,00"
+                required
+                [class.is-invalid]="campoInvalido('preco')"
+                [attr.aria-invalid]="campoInvalido('preco')"
+                [attr.aria-describedby]="campoInvalido('preco') ? 'preco-erro' : null"
+              />
+              <ng-container
+                *ngTemplateOutlet="
+                  erroCampo;
+                  context: {
+                    campo: 'preco',
+                    mensagem: 'Informe um preço maior que zero em reais.',
+                  }
+                "
+              />
+            </div>
 
-              <div class="col-12 col-sm-6">
-                <label class="form-label" for="duracao">Duração (dias) *</label>
-                <input class="form-control" id="duracao" formControlName="duracao" type="text"
-                  inputmode="numeric" placeholder="Ex. 5" required
-                  [class.is-invalid]="campoInvalido('duracao')"
-                  [attr.aria-describedby]="campoInvalido('duracao') ? 'duracao-erro' : null" />
-                <ng-container *ngTemplateOutlet="erroCampo; context: { campo: 'duracao', mensagem: 'Informe a duração em dias inteiros, maior que zero.' }" />
-              </div>
+            <div>
+              <label class="form-label" for="duracao"
+                >Duração (dias) <span [hidden]="editando" aria-hidden="true">*</span></label
+              >
+              <input
+                class="form-control"
+                id="duracao"
+                formControlName="duracao"
+                type="text"
+                inputmode="numeric"
+                placeholder="Ex. 5"
+                required
+                [class.is-invalid]="campoInvalido('duracao')"
+                [attr.aria-invalid]="campoInvalido('duracao')"
+                [attr.aria-describedby]="campoInvalido('duracao') ? 'duracao-erro' : null"
+              />
+              <ng-container
+                *ngTemplateOutlet="
+                  erroCampo;
+                  context: {
+                    campo: 'duracao',
+                    mensagem: 'Informe a duração em dias inteiros, maior que zero.',
+                  }
+                "
+              />
+            </div>
 
-              <div class="col-12 col-sm-6">
-                <label class="form-label" for="hospedagem">Hospedagem *</label>
-                <input class="form-control" id="hospedagem" formControlName="hospedagem" type="text"
-                  placeholder="Ex. Hotel incluso" required
-                  [class.is-invalid]="campoInvalido('hospedagem')"
-                  [attr.aria-describedby]="campoInvalido('hospedagem') ? 'hospedagem-erro' : null" />
-                <ng-container *ngTemplateOutlet="erroCampo; context: { campo: 'hospedagem', mensagem: 'Informe a hospedagem.' }" />
-              </div>
+            <div>
+              <label class="form-label" for="hospedagem"
+                >Hospedagem <span [hidden]="editando" aria-hidden="true">*</span></label
+              >
+              <input
+                class="form-control"
+                id="hospedagem"
+                formControlName="hospedagem"
+                type="text"
+                placeholder="Ex. Hotel incluso"
+                required
+                [class.is-invalid]="campoInvalido('hospedagem')"
+                [attr.aria-invalid]="campoInvalido('hospedagem')"
+                [attr.aria-describedby]="campoInvalido('hospedagem') ? 'hospedagem-erro' : null"
+              />
+              <ng-container
+                *ngTemplateOutlet="
+                  erroCampo;
+                  context: { campo: 'hospedagem', mensagem: 'Informe a hospedagem.' }
+                "
+              />
+            </div>
 
-              <div class="col-12 col-sm-6">
-                <label class="form-label" for="transporte">Transporte *</label>
-                <input class="form-control" id="transporte" formControlName="transporte" type="text"
-                  placeholder="Ex. Aéreo" required
-                  [class.is-invalid]="campoInvalido('transporte')"
-                  [attr.aria-describedby]="campoInvalido('transporte') ? 'transporte-erro' : null" />
-                <ng-container *ngTemplateOutlet="erroCampo; context: { campo: 'transporte', mensagem: 'Informe o transporte.' }" />
-              </div>
+            <div>
+              <label class="form-label" for="transporte"
+                >Transporte <span [hidden]="editando" aria-hidden="true">*</span></label
+              >
+              <input
+                class="form-control"
+                id="transporte"
+                formControlName="transporte"
+                type="text"
+                placeholder="Ex. Aéreo"
+                required
+                [class.is-invalid]="campoInvalido('transporte')"
+                [attr.aria-invalid]="campoInvalido('transporte')"
+                [attr.aria-describedby]="campoInvalido('transporte') ? 'transporte-erro' : null"
+              />
+              <ng-container
+                *ngTemplateOutlet="
+                  erroCampo;
+                  context: { campo: 'transporte', mensagem: 'Informe o transporte.' }
+                "
+              />
+            </div>
 
-              <div class="col-12">
-                <label class="form-label" for="imagem">Imagem (URL) *</label>
-                <input class="form-control" id="imagem" formControlName="imagem" type="url"
-                  placeholder="Cole o link da imagem" required
-                  [class.is-invalid]="campoInvalido('imagem')"
-                  [attr.aria-describedby]="campoInvalido('imagem') ? 'imagem-erro' : null" />
-                <ng-container *ngTemplateOutlet="erroCampo; context: { campo: 'imagem', mensagem: 'Informe uma URL http ou https.' }" />
-              </div>
+            <div class="formulario-largura-total">
+              <label class="form-label" for="imagem"
+                >Imagem (URL) <span [hidden]="editando" aria-hidden="true">*</span></label
+              >
+              <input
+                class="form-control"
+                id="imagem"
+                formControlName="imagem"
+                type="url"
+                placeholder="Cole o link da imagem"
+                required
+                [class.is-invalid]="campoInvalido('imagem')"
+                [attr.aria-invalid]="campoInvalido('imagem')"
+                [attr.aria-describedby]="campoInvalido('imagem') ? 'imagem-erro' : null"
+              />
+              <ng-container
+                *ngTemplateOutlet="
+                  erroCampo;
+                  context: { campo: 'imagem', mensagem: 'Informe uma URL http ou https.' }
+                "
+              />
+            </div>
 
-              @if (erroSalvar()) {
-                <div class="col-12">
-                  <p class="alert alert-danger mb-0" role="alert">{{ erroSalvar() }}</p>
-                </div>
-              }
-
-              <div class="col-12 d-flex gap-2 justify-content-end">
-                <a class="btn btn-secondary" routerLink="/pacotes">Cancelar</a>
-                <button class="btn btn-primary" type="submit">
-                  {{ salvando() ? 'Salvando…' : editando ? 'Salvar alterações' : 'Salvar' }}
-                </button>
+            @if (erroSalvar()) {
+              <div class="formulario-largura-total">
+                <p class="mensagem mensagem-erro" role="alert">{{ erroSalvar() }}</p>
               </div>
+            }
+
+            <div class="formulario-largura-total formulario-acoes">
+              <a class="botao botao-cancelar" routerLink="/pacotes">Cancelar</a>
+              <button class="botao botao-salvar" type="submit">
+                {{ salvando() ? 'Salvando…' : editando ? 'Salvar alterações' : 'Salvar' }}
+              </button>
             </div>
           </div>
         </div>
@@ -118,6 +259,6 @@
 
 <ng-template #erroCampo let-campo="campo" let-mensagem="mensagem">
   @if (campoInvalido(campo)) {
-    <div class="invalid-feedback d-block" [id]="campo + '-erro'">{{ mensagem }}</div>
+    <div class="campo-erro" [id]="campo + '-erro'">{{ mensagem }}</div>
   }
 </ng-template>
