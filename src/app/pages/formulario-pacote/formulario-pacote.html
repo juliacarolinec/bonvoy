@@ -1,26 +1,3 @@
-<header class="formulario-cabecalho">
-  <a class="marca" routerLink="/" aria-label="Planeje, página inicial">
-    <span class="marca-icone" aria-hidden="true">&#9992;&#65038;</span>
-    Planeje
-  </a>
-
-  <nav aria-label="Navegação principal">
-    <a routerLink="/">Home</a>
-    <a routerLink="/pacotes" [class.ativo]="editando">Pacotes</a>
-    <a
-      routerLink="/pacotes/novo"
-      [class.ativo]="!editando"
-      [attr.aria-current]="editando ? null : 'page'"
-    >
-      Cadastrar
-    </a>
-  </nav>
-
-  <button class="perfil" type="button" disabled title="O perfil ficará disponível com o login">
-    Perfil
-  </button>
-</header>
-
 <section class="formulario-conteudo" aria-labelledby="titulo-pagina">
   <h1 id="titulo-pagina">{{ editando ? 'Editar pacote' : 'Cadastrar Novo Pacote' }}</h1>
 

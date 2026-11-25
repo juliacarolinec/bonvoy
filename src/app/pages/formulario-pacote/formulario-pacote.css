@@ -16,67 +16,6 @@
   line-height: 1.4;
 }
 
-.formulario-cabecalho {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 1rem;
-  max-width: 66rem;
-  min-height: 2.25rem;
-  margin-inline: auto;
-  padding: 2.6rem 1rem 0;
-}
-
-.formulario-cabecalho a {
-  color: var(--azul);
-  text-decoration: none;
-}
-
-.formulario-cabecalho .marca {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  justify-self: start;
-  font-weight: 750;
-  text-transform: uppercase;
-}
-
-.marca-icone {
-  display: inline-block;
-  font-size: 1.85rem;
-  line-height: 1;
-  transform: rotate(-25deg);
-}
-
-.formulario-cabecalho nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: clamp(1rem, 3.5vw, 2.5rem);
-  font-size: 1.05rem;
-}
-
-.formulario-cabecalho nav a {
-  padding-block: 0.35rem;
-}
-
-.formulario-cabecalho nav a:hover,
-.formulario-cabecalho nav .ativo {
-  text-decoration: underline;
-  text-underline-offset: 0.3em;
-}
-
-.perfil {
-  justify-self: end;
-  min-width: 5.6rem;
-  padding: 0.35rem 1rem;
-  border: 0;
-  background: var(--azul);
-  color: white;
-  font: inherit;
-  font-weight: 700;
-}
-
 .formulario-conteudo {
   margin: 3.55rem clamp(1rem, 2.25vw, 1.75rem) 3rem clamp(1rem, 9vw, 6.75rem);
 }
@@ -254,16 +193,6 @@ a:focus-visible,
 }
 
 @media (max-width: 540px) {
-  .formulario-cabecalho {
-    grid-template-columns: 1fr 1fr;
-    padding-top: 1rem;
-  }
-
-  .formulario-cabecalho nav {
-    grid-column: 1 / -1;
-    grid-row: 2;
-  }
-
   .formulario-coluna-direita {
     column-gap: 0.75rem;
   }
