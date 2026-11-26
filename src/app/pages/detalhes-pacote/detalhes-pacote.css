@@ -9,7 +9,7 @@
   max-width: 75rem;
   margin-inline: auto;
   color: #141414;
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-family: inherit;
   line-height: 1.4;
 }
 
@@ -64,7 +64,7 @@ h1 {
 .detalhes-painel h2 {
   margin: 0;
   color: var(--azul-titulo);
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: inherit;
   font-size: clamp(1.5rem, 3vw, 1.85rem);
   line-height: 1.14;
 }
