@@ -1,0 +1,54 @@
+<section class="pacotes-conteudo" aria-labelledby="titulo-pacotes">
+    <header class="pacotes-cabecalho">
+        <h1 id="titulo-pacotes">Pacotes de Viagens</h1>
+
+        <div class="busca">
+            <span class="busca-icone" aria-hidden="true"></span>
+            <input type="search" aria-label="Buscar por destino" placeholder="Buscar por destino..."
+                (input)="buscar($event)" />
+        </div>
+    </header>
+
+    @if (erro()) {
+    <p class="mensagem mensagem-erro" role="alert">{{ erro() }}</p>
+    }
+
+    @if (carregando()) {
+    <p class="mensagem" role="status">Carregando pacotes...</p>
+    } @else {
+    <div class="pacotes-grade">
+        @for (pacote of pacotesFiltrados; track pacote.id) {
+        <article class="pacote-card">
+            <img class="pacote-imagem" [src]="pacote.imagem" [alt]="pacote.destino" loading="lazy" />
+
+            <div class="pacote-corpo">
+                <h2>{{ pacote.titulo }}</h2>
+
+                <p class="pacote-duracao">
+                    {{ pacote.duracao }} {{ pacote.duracao === 1 ? 'dia' : 'dias' }}
+                </p>
+
+                <p class="pacote-preco">{{ formatoPreco.format(pacote.preco) }}</p>
+
+                <div class="pacote-acoes">
+                    <a class="botao" [routerLink]="['/pacotes', pacote.id]"
+                        [attr.aria-label]="'Ver detalhes de ' + pacote.titulo">Ver detalhes</a>
+
+                    <a class="botao" [routerLink]="['/pacotes', pacote.id, 'editar']"
+                        [attr.aria-label]="'Editar ' + pacote.titulo"><span aria-hidden="true">✎</span> Editar</a>
+
+                    <button class="botao botao-excluir" type="button" [attr.aria-label]="'Excluir ' + pacote.titulo"
+                        (click)="excluir(pacote)"><span aria-hidden="true">🗑︎</span> Excluir</button>
+                </div>
+            </div>
+        </article>
+        } @empty {
+        @if (!erro()) {
+        <p class="mensagem" role="status">Nenhum pacote encontrado.</p>
+        }
+        }
+    </div>
+    }
+
+    <a class="cadastro-link" routerLink="/pacotes/novo">Cadastrar pacote</a>
+</section>

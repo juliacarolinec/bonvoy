@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Pacote } from '../../models/pacote';
 import { PacoteService } from '../../services/pacote.service';
@@ -7,33 +6,18 @@ import { PacoteService } from '../../services/pacote.service';
 @Component({
     selector: 'app-detalhes-pacote',
     standalone: true,
-    imports: [CommonModule],
-    template: `
-    <h1>Detalhes do pacote</h1>
-
-    <p *ngIf="carregando">Carregando pacote...</p>
-
-    <p *ngIf="erro">{{ erro }}</p>
-
-    <div *ngIf="pacote">
-      <img [src]="pacote.imagem" [alt]="pacote.destino" width="400">
-
-      <h2>{{ pacote.titulo }}</h2>
-      <p>Destino: {{ pacote.destino }}</p>
-      <p>Preço: {{ pacote.preco | currency:'BRL' }}</p>
-      <p>Duração: {{ pacote.duracao }} dias</p>
-      <p>Hospedagem: {{ pacote.hospedagem }}</p>
-      <p>Transporte: {{ pacote.transporte }}</p>
-
-      <h3>Descrição</h3>
-      <p>{{ pacote.descricao }}</p>
-    </div>
-  `
+    templateUrl: './detalhes-pacote.html',
+    styleUrl: './detalhes-pacote.css'
 })
 export class DetalhesPacoteComponent implements OnInit {
-    pacote?: Pacote;
-    carregando = true;
-    erro = '';
+    readonly pacote = signal<Pacote | null>(null);
+    readonly carregando = signal(true);
+    readonly erro = signal('');
+
+    readonly formatoPreco = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+    });
 
     constructor(
         private route: ActivatedRoute,
@@ -44,19 +28,19 @@ export class DetalhesPacoteComponent implements OnInit {
         const id = this.route.snapshot.paramMap.get('id');
 
         if (!id) {
-            this.erro = 'ID do pacote não encontrado.';
-            this.carregando = false;
+            this.erro.set('ID do pacote não encontrado.');
+            this.carregando.set(false);
             return;
         }
 
         this.pacoteService.buscarPorId(id).subscribe({
-            next: dados => {
-                this.pacote = dados;
-                this.carregando = false;
+            next: (dados) => {
+                this.pacote.set(dados);
+                this.carregando.set(false);
             },
             error: () => {
-                this.erro = 'Não foi possível encontrar esse pacote.';
-                this.carregando = false;
+                this.erro.set('Não foi possível encontrar esse pacote.');
+                this.carregando.set(false);
             }
         });
     }

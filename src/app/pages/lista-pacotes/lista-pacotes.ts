@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Pacote } from '../../models/pacote';
 import { PacoteService } from '../../services/pacote.service';
@@ -7,69 +6,40 @@ import { PacoteService } from '../../services/pacote.service';
 @Component({
     selector: 'app-lista-pacotes',
     standalone: true,
-    imports: [CommonModule, RouterLink],
-    template: `
-    <h1>Pacotes de viagens</h1>
-    <p><a routerLink="/pacotes/novo">Cadastrar pacote</a></p>
-
-    <label for="busca">Buscar por destino:</label>
-    <input
-      id="busca"
-      type="text"
-      placeholder="Digite um destino"
-      (input)="buscar($event)"
-    >
-
-    <p *ngIf="erro">{{ erro }}</p>
-    <p *ngIf="carregando">Carregando pacotes...</p>
-
-    <article *ngFor="let pacote of pacotesFiltrados">
-      <img
-        [src]="pacote.imagem"
-        [alt]="'Destino: ' + pacote.destino"
-        width="300"
-      >
-
-      <h2>{{ pacote.titulo }}</h2>
-      <p>{{ pacote.duracao }} dias</p>
-      <p>{{ pacote.preco | currency:'BRL' }}</p>
-
-      <a [routerLink]="['/pacotes', pacote.id]">Ver detalhes</a>
-      <a [routerLink]="['/pacotes', pacote.id, 'editar']">Editar</a>
-
-      <button type="button" (click)="excluir(pacote)">
-        Excluir
-      </button>
-    </article>
-
-    <p *ngIf="!carregando && pacotesFiltrados.length === 0 && !erro">
-      Nenhum pacote encontrado.
-    </p>
-  `
+    imports: [RouterLink],
+    templateUrl: './lista-pacotes.html',
+    styleUrl: './lista-pacotes.css',
 })
 export class ListaPacotesComponent implements OnInit {
-    pacotes: Pacote[] = [];
+    readonly pacotes = signal<Pacote[]>([]);
+    readonly carregando = signal(true);
+    readonly erro = signal('');
+
     termoBusca = '';
-    carregando = true;
-    erro = '';
+
+    readonly formatoPreco = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+    });
 
     constructor(private pacoteService: PacoteService) { }
 
     get pacotesFiltrados(): Pacote[] {
-        return this.pacotes.filter(pacote =>
-            pacote.destino.toLowerCase().includes(this.termoBusca.toLowerCase())
+        const destino = this.termoBusca.trim().toLowerCase();
+        return this.pacotes().filter((pacote) =>
+            pacote.destino.toLowerCase().includes(destino)
         );
     }
 
     ngOnInit(): void {
         this.pacoteService.listar().subscribe({
-            next: dados => {
-                this.pacotes = dados;
-                this.carregando = false;
+            next: (dados) => {
+                this.pacotes.set(dados);
+                this.carregando.set(false);
             },
             error: () => {
-                this.erro = 'Não foi possível carregar os pacotes.';
-                this.carregando = false;
+                this.erro.set('Não foi possível carregar os pacotes.');
+                this.carregando.set(false);
             }
         });
     }
@@ -88,12 +58,15 @@ export class ListaPacotesComponent implements OnInit {
             return;
         }
 
+        this.erro.set('');
+
         this.pacoteService.excluir(pacote.id).subscribe({
             next: () => {
-                this.pacotes = this.pacotes.filter(item => item.id !== pacote.id);
+                this.pacotes.update((itens)=>
+                 itens.filter((item) => item.id !== pacote.id));
             },
             error: () => {
-                this.erro = 'Não foi possível excluir o pacote.';
+                this.erro.set('Não foi possível excluir o pacote.');
             }
         });
     }

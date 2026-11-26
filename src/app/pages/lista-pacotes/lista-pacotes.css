@@ -1,0 +1,226 @@
+:host {
+  --azul-escuro: #355a86;
+  --azul-borda: #5b82b8;
+  --azul-acento: #23758a;
+  --cinza: #76686d;
+  --vermelho: #a82528;
+
+  display: block;
+  max-width: 75rem;
+  margin-inline: auto;
+  color: #141414;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  line-height: 1.4;
+}
+
+.pacotes-conteudo {
+  margin: 3.55rem clamp(1rem, 4.25vw, 3.25rem) 3rem;
+}
+
+.pacotes-cabecalho {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(14rem, 32%);
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.15rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.85rem, 4vw, 2.3rem);
+  font-weight: 760;
+  line-height: 1.18;
+}
+
+.busca {
+  position: relative;
+  color: var(--cinza);
+}
+
+.busca input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.45rem 0.75rem 0.45rem 2.15rem;
+  border: 1px solid var(--azul-borda);
+  border-radius: 0.15rem;
+  background: #fff;
+  color: #22252a;
+  font: inherit;
+}
+
+.busca input::placeholder {
+  color: var(--cinza);
+}
+
+.busca-icone {
+  position: absolute;
+  top: 50%;
+  left: 0.65rem;
+  box-sizing: border-box;
+  width: 0.85rem;
+  height: 0.85rem;
+  transform: translateY(-60%);
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.busca-icone::after {
+  position: absolute;
+  top: 90%;
+  left: 85%;
+  width: 0.42rem;
+  height: 1.5px;
+  transform: rotate(45deg);
+  transform-origin: left;
+  background: currentColor;
+  content: '';
+}
+
+.pacotes-grade {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.85rem, 1.65vw, 1.35rem);
+}
+
+.pacote-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #b9adb0;
+  border-radius: 0.85rem;
+  background: #fff;
+  box-shadow: 0 3px 12px rgb(0 0 0 / 6%);
+}
+
+.pacote-imagem {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 4;
+  object-fit: cover;
+  background: #edf2f7;
+}
+
+.pacote-corpo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 0.55rem 0.8rem 0.7rem;
+  overflow-wrap: anywhere;
+}
+
+.pacote-corpo h2,
+.pacote-corpo p {
+  margin: 0;
+}
+
+.pacote-corpo h2 {
+  font-size: 1.08rem;
+  line-height: 1.24;
+}
+
+.pacote-duracao {
+  color: var(--cinza);
+  font-size: 0.9rem;
+}
+
+.pacote-preco {
+  color: var(--azul-acento);
+  font-size: 1.2rem;
+  font-weight: 750;
+}
+
+.pacote-acoes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.3rem;
+}
+
+.botao {
+  box-sizing: border-box;
+  display: inline-flex;
+  min-height: 2rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25em;
+  padding: 0.2rem 0.25rem;
+  border: 1px solid currentColor;
+  border-radius: 0.45rem;
+  background: #fff;
+  color: var(--azul-acento);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.botao:hover {
+  background: #ecf7fa;
+}
+
+.botao-excluir {
+  color: var(--vermelho);
+}
+
+.botao-excluir:hover {
+  background: #fff3f3;
+}
+
+.cadastro-link {
+  display: inline-block;
+  margin-top: 1.35rem;
+  color: var(--azul-escuro);
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+:where(a, button, input):focus-visible {
+  outline: 2px solid var(--azul-escuro);
+  outline-offset: 2px;
+}
+
+.mensagem {
+  grid-column: 1 / -1;
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--azul-borda);
+  border-radius: 0.35rem;
+}
+
+.mensagem-erro {
+  border-color: currentColor;
+  background: #fff3f3;
+  color: var(--vermelho);
+}
+
+@media (max-width: 950px) {
+  .pacotes-grade {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .pacotes-conteudo {
+    margin: 2.4rem 1rem 2rem;
+  }
+
+  .pacotes-cabecalho,
+  .pacotes-grade {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pacotes-cabecalho {
+    margin-bottom: 1.35rem;
+  }
+
+  .botao {
+    min-height: 2.5rem;
+  }
+}
