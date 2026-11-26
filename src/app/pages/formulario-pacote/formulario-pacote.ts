@@ -48,6 +48,7 @@ const imagemValida: ValidatorFn = ({ value }) => {
   selector: 'app-formulario-pacote',
   imports: [NgTemplateOutlet, ReactiveFormsModule, RouterLink],
   templateUrl: './formulario-pacote.html',
+  styleUrl: './formulario-pacote.css',
 })
 export class FormularioPacote {
   private readonly rota = inject(ActivatedRoute);
