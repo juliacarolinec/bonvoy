@@ -1,0 +1,42 @@
+
+
+<main class="login">
+  <div class="login-imagem">
+    <img src="/login-praia.png" alt="Praia com mar azul" />
+  </div>
+
+  <section class="login-formulario">
+    <h1>Cadastra-se</h1>
+    <h2>Login</h2>
+
+    <form (ngSubmit)="entrar()" novalidate>
+      <label for="email">E-mail</label>
+      <input
+        id="email"
+        type="email"
+        name="email"
+        [(ngModel)]="email"
+        placeholder="Digite seu e-mail"
+        required
+      />
+
+      <label for="senha">Senha</label>
+      <input
+        id="senha"
+        type="password"
+        name="senha"
+        [(ngModel)]="senha"
+        placeholder="Digite sua senha"
+        required
+      />
+
+      @if (mensagem) {
+        <p class="mensagem" role="alert">{{ mensagem }}</p>
+      }
+
+      <button type="submit" [disabled]="carregando">
+        {{ carregando ? 'Entrando...' : 'Login' }}
+      </button>
+    </form>
+  </section>
+</main>
