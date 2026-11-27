@@ -1,12 +1,14 @@
 import { Routes } from '@angular/router';
 import { ListaPacotesComponent } from './pages/lista-pacotes/lista-pacotes';
 import { DetalhesPacoteComponent } from './pages/detalhes-pacote/detalhes-pacote';
-
-import { formularioPacoteRoutes } from './pages/formulario-pacote/formulario-pacote.routes';
+import { HomeComponent } from './pages/home/home';
+import { formularioPacoteRoutes } from './pages/formulario-pacote/formulario-pacote.routes';import { LoginComponent } from './pages/login/login';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'pacotes', pathMatch: 'full' },
+   { path: '', component: HomeComponent, pathMatch: 'full' },
     { path: 'pacotes', component: ListaPacotesComponent },
     ...formularioPacoteRoutes,
-    { path: 'pacotes/:id', component: DetalhesPacoteComponent }
+    { path: 'pacotes/:id', component: DetalhesPacoteComponent },
+    { path: 'login', component: LoginComponent },
 ];
+

@@ -1,0 +1,86 @@
+
+.login {
+  max-width: 1100px;
+  margin: 70px auto;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+
+.login-imagem,
+.login-formulario {
+  flex: 1;
+}
+
+.login-imagem img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+.login-formulario h1 {
+  color: #608cbb;
+  font-size: 60px;
+  margin-bottom: 30px;
+}
+
+.login-formulario h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  font-weight: normal;
+}
+
+.login-formulario form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-formulario input {
+  padding: 12px;
+  border: 1px solid #608cbb;
+  font-size: 15px;
+}
+
+.login-formulario button {
+  display: block;
+  width: 210px;
+  margin: 15px auto 0;
+  background: #608cbb;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.login-formulario button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.mensagem {
+  color: #b3261e;
+}
+
+@media (max-width: 700px) {
+  .login {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .login-imagem,
+  .login-formulario {
+    width: 100%;
+  }
+
+  .login-imagem img {
+    height: 300px;
+  }
+
+  .login-formulario h1 {
+    font-size: 42px;
+  }
+}

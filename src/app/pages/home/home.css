@@ -1,0 +1,25 @@
+
+.home {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('/home-aviao.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.home-conteudo {
+  text-align: center;
+  padding: 20px;
+  transform: translateY(-60px);
+}
+
+.home h1 {
+  color: white;
+  font-size: clamp(64px, 10vw, 120px);
+  font-weight: bold;
+  text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.3);
+}

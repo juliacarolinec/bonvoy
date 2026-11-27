@@ -68,3 +68,21 @@
     grid-row: 2;
   }
 }
+
+.cabecalho:has(+ router-outlet + app-home) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  max-width: 100%;
+}
+
+.cabecalho:has(+ router-outlet + app-home) a {
+  color: white;
+}
+
+.cabecalho:has(+ router-outlet + app-home) .perfil {
+  background: white;
+  color: #4e75a5;
+}
