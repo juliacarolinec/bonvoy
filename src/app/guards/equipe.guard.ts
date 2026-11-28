@@ -5,5 +5,9 @@ import { SessaoEquipeService } from '../services/sessao-equipe';
 export const equipeGuard: CanActivateFn = () => {
   const sessao = inject(SessaoEquipeService);
 
-  return sessao.logada() || inject(Router).createUrlTree(['/login']);
+  if (sessao.ehEquipe()) return true;
+
+  return inject(Router).createUrlTree([
+    sessao.logada() ? '/pacotes' : '/login',
+  ]);
 };

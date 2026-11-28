@@ -3,7 +3,7 @@
         <div class="pacotes-titulo">
             <h1 id="titulo-pacotes">Pacotes de Viagens</h1>
 
-            @if (sessaoEquipe.logada()) {
+            @if (sessaoEquipe.ehEquipe()) {
             <a class="botao novo-pacote" routerLink="/pacotes/novo">+ Novo pacote</a>
             }
         </div>
@@ -41,13 +41,13 @@
 
                 <p class="pacote-preco">{{ formatoPreco.format(pacote.preco) }}</p>
 
-                <div class="pacote-acoes" [class.pacote-acoes-publicas]="!sessaoEquipe.logada()">
+                <div class="pacote-acoes" [class.pacote-acoes-publicas]="!sessaoEquipe.ehEquipe()">
                     <a class="botao" [routerLink]="['/pacotes', pacote.id]"
                         [attr.aria-label]="'Ver detalhes de ' + pacote.titulo">
                         Ver detalhes
                     </a>
 
-                    @if (sessaoEquipe.logada()) {
+                    @if (sessaoEquipe.ehEquipe()) {
                     <a class="botao" [routerLink]="['/pacotes', pacote.id, 'editar']"
                         [attr.aria-label]="'Editar ' + pacote.titulo">
                         <span aria-hidden="true">✎</span> Editar

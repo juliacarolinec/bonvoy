@@ -4,7 +4,15 @@
             "id": "1",
             "nome": "Usuária de demonstração",
             "email": "demo@bonvoy.com",
-            "senha": "123456"
+            "senha": "123456",
+            "tipo": "equipe"
+        },
+        {
+            "id": "cliente-demo",
+            "nome": "Cliente de demonstração",
+            "email": "cliente@gmail.com",
+            "senha": "cliente123",
+            "tipo": "cliente"
         }
     ],
     "pacotes": [

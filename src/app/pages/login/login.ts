@@ -49,7 +49,7 @@ export class LoginComponent {
         this.carregando = false;
 
         if (usuario) {
-          this.sessaoEquipe.iniciar();
+          this.sessaoEquipe.iniciar(usuario);
           this.router.navigate(['/pacotes']);
         } else {
           this.mensagem = 'E-mail ou senha incorretos.';

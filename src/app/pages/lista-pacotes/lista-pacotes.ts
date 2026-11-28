@@ -53,7 +53,7 @@ export class ListaPacotesComponent implements OnInit {
     }
 
     excluir(pacote: Pacote): void {
-        if (!this.sessaoEquipe.logada()) return;
+        if (!this.sessaoEquipe.ehEquipe()) return;
         const confirmou = window.confirm(
             `Deseja excluir o pacote "${pacote.titulo}"?`
         );

@@ -2,11 +2,12 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-interface Usuario {
+export interface Usuario {
   id: string;
   nome: string;
   email: string;
   senha: string;
+  tipo: 'cliente' | 'equipe';
 }
 
 @Injectable({
