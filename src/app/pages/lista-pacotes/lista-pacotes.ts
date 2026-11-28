@@ -1,7 +1,8 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { RouterLink, Router } from '@angular/router';
 import { Pacote } from '../../models/pacote';
 import { PacoteService } from '../../services/pacote.service';
+import { SessaoEquipeService } from '../../services/sessao-equipe';
 
 @Component({
     selector: 'app-lista-pacotes',
@@ -14,6 +15,8 @@ export class ListaPacotesComponent implements OnInit {
     readonly pacotes = signal<Pacote[]>([]);
     readonly carregando = signal(true);
     readonly erro = signal('');
+    protected readonly sessaoEquipe = inject(SessaoEquipeService);
+    protected readonly mensagemSucesso = inject(Router).currentNavigation()?.extras.info;
 
     termoBusca = '';
 
@@ -50,6 +53,7 @@ export class ListaPacotesComponent implements OnInit {
     }
 
     excluir(pacote: Pacote): void {
+        if (!this.sessaoEquipe.logada()) return;
         const confirmou = window.confirm(
             `Deseja excluir o pacote "${pacote.titulo}"?`
         );

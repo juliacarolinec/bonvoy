@@ -1,5 +1,5 @@
 <section class="formulario-conteudo" aria-labelledby="titulo-pagina">
-  <h1 id="titulo-pagina">{{ editando ? 'Editar pacote' : 'Cadastrar Novo Pacote' }}</h1>
+  <h1 id="titulo-pagina">{{ editando ? 'Editar pacote' : 'Novo Pacote' }}</h1>
 
   @if (carregando()) {
     <p role="status">Carregando pacote…</p>
@@ -7,16 +7,6 @@
     <p class="mensagem mensagem-erro" role="alert">{{ erroCarregamento() }}</p>
     <a routerLink="/pacotes">Voltar aos pacotes</a>
   } @else {
-    @if (pacoteSalvo(); as pacote) {
-      <div class="mensagem mensagem-sucesso" role="status">
-        {{ editando ? 'Alterações salvas com sucesso.' : 'Pacote cadastrado com sucesso.' }}
-        @if (!editando) {
-          <a [routerLink]="['/pacotes', pacote.id, 'editar']">Editar pacote cadastrado</a>
-        }
-        <a routerLink="/pacotes">Voltar aos pacotes</a>
-      </div>
-    }
-
     <form [formGroup]="formulario" (ngSubmit)="salvar()" novalidate>
       <fieldset [disabled]="salvando()" [attr.aria-busy]="salvando()">
         <div class="formulario-colunas">

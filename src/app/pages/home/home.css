@@ -1,11 +1,11 @@
 
 .home {
   width: 100%;
-  min-height: 100vh;
+  min-height: 97vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('/home-aviao.png');
+  background-image: url('/home-aviao.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -22,4 +22,15 @@
   font-size: clamp(64px, 10vw, 120px);
   font-weight: bold;
   text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.explorar-pacotes {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  background: #fff;
+  color: #355a86;
+  font-weight: 700;
+  text-decoration: none;
 }

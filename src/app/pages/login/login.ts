@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario';
+import { SessaoEquipeService } from '../../services/sessao-equipe';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent {
 
   private usuarioService = inject(UsuarioService);
   private router = inject(Router);
+  private readonly sessaoEquipe = inject(SessaoEquipeService);
 
   entrar() {
     this.mensagem = '';
@@ -47,6 +49,7 @@ export class LoginComponent {
         this.carregando = false;
 
         if (usuario) {
+          this.sessaoEquipe.iniciar();
           this.router.navigate(['/pacotes']);
         } else {
           this.mensagem = 'E-mail ou senha incorretos.';

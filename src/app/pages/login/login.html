@@ -6,8 +6,7 @@
   </div>
 
   <section class="login-formulario">
-    <h1>Cadastra-se</h1>
-    <h2>Login</h2>
+    <h1>Área da Equipe</h1>
 
     <form (ngSubmit)="entrar()" novalidate>
       <label for="email">E-mail</label>
@@ -35,7 +34,7 @@
       }
 
       <button type="submit" [disabled]="carregando">
-        {{ carregando ? 'Entrando...' : 'Login' }}
+        {{ carregando ? 'Entrando...' : 'Entrar' }}
       </button>
     </form>
   </section>

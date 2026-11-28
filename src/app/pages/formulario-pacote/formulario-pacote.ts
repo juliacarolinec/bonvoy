@@ -7,6 +7,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { catchError, finalize, map, of, switchMap, tap } from 'rxjs';
 import { DadosPacote, Pacote } from '../../models/pacote';
 import { PacoteService } from '../../services/pacote.service';
+import { Router } from '@angular/router';
 
 const formatoPreco = new Intl.NumberFormat('pt-BR', {
   minimumFractionDigits: 2,
@@ -51,6 +52,7 @@ const imagemValida: ValidatorFn = ({ value }) => {
   styleUrl: './formulario-pacote.css',
 })
 export class FormularioPacote {
+  private readonly router = inject(Router);
   private readonly rota = inject(ActivatedRoute);
   private readonly pacotes = inject(PacoteService);
   private readonly fb = inject(FormBuilder).nonNullable;
@@ -60,7 +62,6 @@ export class FormularioPacote {
   protected readonly erroCarregamento = signal('');
   protected readonly salvando = signal(false);
   protected readonly erroSalvar = signal('');
-  protected readonly pacoteSalvo = signal<Pacote | null>(null);
 
   protected readonly formulario = this.fb.group({
     titulo: ['', campoObrigatorio],
@@ -86,7 +87,6 @@ export class FormularioPacote {
           this.carregando.set(true);
           this.erroCarregamento.set('');
           this.erroSalvar.set('');
-          this.pacoteSalvo.set(null);
         }),
         switchMap((id) =>
           this.pacotes.buscarPorId(id).pipe(
@@ -117,7 +117,6 @@ export class FormularioPacote {
     if (this.salvando() || this.carregando() || this.erroCarregamento()) return;
 
     this.erroSalvar.set('');
-    this.pacoteSalvo.set(null);
     if (this.formulario.invalid) {
       this.formulario.markAllAsTouched();
       return;
@@ -140,15 +139,14 @@ export class FormularioPacote {
 
     this.salvando.set(true);
     requisicao.pipe(finalize(() => this.salvando.set(false))).subscribe({
-      next: (pacote) => {
+      next: () => {
         if (id !== this.id) return;
 
-        if (this.editando) {
-          this.preencher(pacote);
-        } else {
-          this.formulario.reset();
-        }
-        this.pacoteSalvo.set(pacote);
+        void this.router.navigate(['/pacotes'], {
+          info: this.editando
+            ? 'Alterações salvas com sucesso.'
+            : 'Pacote cadastrado com sucesso.',
+        });
       },
       error: () => {
         if (id === this.id) {

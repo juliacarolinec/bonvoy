@@ -1,6 +1,12 @@
 <section class="pacotes-conteudo" aria-labelledby="titulo-pacotes">
     <header class="pacotes-cabecalho">
-        <h1 id="titulo-pacotes">Pacotes de Viagens</h1>
+        <div class="pacotes-titulo">
+            <h1 id="titulo-pacotes">Pacotes de Viagens</h1>
+
+            @if (sessaoEquipe.logada()) {
+            <a class="botao novo-pacote" routerLink="/pacotes/novo">+ Novo pacote</a>
+            }
+        </div>
 
         <div class="busca">
             <span class="busca-icone" aria-hidden="true"></span>
@@ -8,6 +14,11 @@
                 (input)="buscar($event)" />
         </div>
     </header>
+
+    @if (mensagemSucesso === 'Pacote cadastrado com sucesso.' ||
+    mensagemSucesso === 'Alterações salvas com sucesso.') {
+    <p class="mensagem" role="status">{{ mensagemSucesso }}</p>
+    }
 
     @if (erro()) {
     <p class="mensagem mensagem-erro" role="alert">{{ erro() }}</p>
@@ -30,15 +41,23 @@
 
                 <p class="pacote-preco">{{ formatoPreco.format(pacote.preco) }}</p>
 
-                <div class="pacote-acoes">
+                <div class="pacote-acoes" [class.pacote-acoes-publicas]="!sessaoEquipe.logada()">
                     <a class="botao" [routerLink]="['/pacotes', pacote.id]"
-                        [attr.aria-label]="'Ver detalhes de ' + pacote.titulo">Ver detalhes</a>
+                        [attr.aria-label]="'Ver detalhes de ' + pacote.titulo">
+                        Ver detalhes
+                    </a>
 
+                    @if (sessaoEquipe.logada()) {
                     <a class="botao" [routerLink]="['/pacotes', pacote.id, 'editar']"
-                        [attr.aria-label]="'Editar ' + pacote.titulo"><span aria-hidden="true">✎</span> Editar</a>
+                        [attr.aria-label]="'Editar ' + pacote.titulo">
+                        <span aria-hidden="true">✎</span> Editar
+                    </a>
 
                     <button class="botao botao-excluir" type="button" [attr.aria-label]="'Excluir ' + pacote.titulo"
-                        (click)="excluir(pacote)"><span aria-hidden="true">🗑︎</span> Excluir</button>
+                        (click)="excluir(pacote)">
+                        <span aria-hidden="true">🗑︎</span> Excluir
+                    </button>
+                    }
                 </div>
             </div>
         </article>
@@ -50,5 +69,4 @@
     </div>
     }
 
-    <a class="cadastro-link" routerLink="/pacotes/novo">Cadastrar pacote</a>
 </section>

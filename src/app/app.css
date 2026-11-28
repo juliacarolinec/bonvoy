@@ -52,6 +52,9 @@
   background: #4e75a5;
   color: #fff;
   font-weight: 700;
+  border: 0;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 .cabecalho .perfil:hover {

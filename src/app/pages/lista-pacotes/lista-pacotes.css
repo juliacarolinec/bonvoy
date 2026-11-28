@@ -223,4 +223,19 @@ h1 {
   .botao {
     min-height: 2.5rem;
   }
+
+  .pacotes-titulo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .novo-pacote {
+    padding-inline: 0.75rem;
+  }
+
+  .pacote-acoes-publicas {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
