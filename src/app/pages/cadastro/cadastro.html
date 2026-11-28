@@ -1,0 +1,33 @@
+<main class="login">
+  <div class="login-imagem">
+    <img src="/login-praia.png" alt="Praia com mar azul" />
+  </div>
+
+  <section class="login-formulario">
+    <h1>Criar conta</h1>
+
+    <form #formulario="ngForm" (ngSubmit)="cadastrar(formulario.valid)" novalidate>
+      <label for="nome">Nome</label>
+      <input id="nome" name="nome" [(ngModel)]="nome"
+        autocomplete="name" required />
+
+      <label for="email">E-mail</label>
+      <input id="email" type="email" name="email" [(ngModel)]="email"
+        autocomplete="email" required email />
+
+      <label for="senha">Senha</label>
+      <input id="senha" type="password" name="senha" [(ngModel)]="senha"
+        autocomplete="new-password" minlength="6" required />
+
+      @if (mensagem()) {
+        <p class="mensagem" role="alert">{{ mensagem() }}</p>
+      }
+
+      <button type="submit" [disabled]="salvando()">
+        {{ salvando() ? 'Criando conta...' : 'Criar conta' }}
+      </button>
+    </form>
+
+    <p>Já tem conta? <a routerLink="/login">Entrar</a></p>
+  </section>
+</main>

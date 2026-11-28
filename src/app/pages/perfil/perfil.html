@@ -1,0 +1,18 @@
+<main class="perfil-pagina">
+  <h1>Meu perfil</h1>
+
+  @if (usuario(); as pessoa) {
+    <dl>
+      <dt>Nome</dt>
+      <dd>{{ pessoa.nome }}</dd>
+
+      <dt>E-mail</dt>
+      <dd>{{ pessoa.email }}</dd>
+
+      <dt>Tipo de conta</dt>
+      <dd>{{ pessoa.tipo === 'equipe' ? 'Equipe BonVoy' : 'Cliente' }}</dd>
+    </dl>
+
+    <button type="button" (click)="sair()">Sair</button>
+  }
+</main>

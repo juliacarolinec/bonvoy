@@ -14,9 +14,9 @@
   </nav>
 
   @if (sessaoEquipe.logada()) {
-  <button class="perfil" type="button" (click)="sair()">Sair</button>
+  <a class="perfil" routerLink="/perfil">Meu perfil</a>
   } @else {
-  <a class="perfil" routerLink="/login">Login</a>
+  <a class="perfil" routerLink="/login">Entrar</a>
   }
 </header>
 <router-outlet></router-outlet>

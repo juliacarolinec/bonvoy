@@ -20,4 +20,11 @@ export class UsuarioService {
   listar() {
     return this.http.get<Usuario[]>(this.apiUrl);
   }
+
+  cadastrarCliente(dados: Omit<Usuario, 'id' | 'tipo'>) {
+    return this.http.post<Usuario>(this.apiUrl, {
+      ...dados,
+      tipo: 'cliente',
+    });
+  }
 }

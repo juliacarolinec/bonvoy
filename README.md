@@ -44,10 +44,6 @@ A aplicação será aberta em `http://localhost:4200`. A API do JSON-Server fica
 
 Cada pacote possui `id`, `titulo`, `destino`, `descricao`, `imagem`, `preco`, `duracao`, `hospedagem` e `transporte`.
 
-## Divisão do trabalho
+## Equipe
 
-Júlia ficará responsável pela listagem, pelos detalhes e pela exclusão dos pacotes. Ana Paula ficará responsável pelo cadastro e pela edição. Mariana ficará responsável pelo login, pela página inicial e pela integração das rotas. A parte visual em CSS será desenvolvida em grupo.
-
-## Observação
-
-Os dados cadastrados, editados ou excluídos pelo JSON-Server são gravados em `db.json`. Antes de compartilhar alterações no Git, confira esse arquivo para evitar enviar dados de teste sem querer.
+O BonVoy foi desenvolvido em colaboração por Júlia Caroline, Ana Paula Rodrigues e Mariana Fuchs.

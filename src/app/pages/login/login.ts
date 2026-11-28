@@ -1,14 +1,14 @@
 
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UsuarioService } from '../../services/usuario';
 import { SessaoEquipeService } from '../../services/sessao-equipe';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
@@ -42,8 +42,8 @@ export class LoginComponent {
     this.usuarioService.listar().subscribe({
       next: (usuarios) => {
         const usuario = usuarios.find(
-          u => u.email === this.email.trim() &&
-               u.senha === this.senha
+          u => u.email.trim().toLowerCase() === this.email.trim().toLowerCase() &&
+            u.senha === this.senha
         );
 
         this.carregando = false;
