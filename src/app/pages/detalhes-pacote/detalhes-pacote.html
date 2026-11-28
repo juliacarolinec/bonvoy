@@ -2,50 +2,61 @@
   <h1 id="titulo-detalhes">Detalhes do pacote</h1>
 
   @if (carregando()) {
-    <p class="mensagem" role="status">Carregando pacote...</p>
+  <p class="mensagem" role="status">Carregando pacote...</p>
   } @else if (erro()) {
-    <p class="mensagem mensagem-erro" role="alert">{{ erro() }}</p>
+  <p class="mensagem mensagem-erro" role="alert">{{ erro() }}</p>
   } @else if (pacote(); as viagem) {
-    <article class="detalhes-grade" aria-labelledby="titulo-viagem">
-      <figure class="detalhes-foto">
-        <img [src]="viagem.imagem" [alt]="viagem.destino" />
-      </figure>
+  <article class="detalhes-grade" aria-labelledby="titulo-viagem">
+    <figure class="detalhes-foto">
+      <img [src]="viagem.imagem" [alt]="viagem.destino" />
+    </figure>
 
-      <div class="detalhes-painel">
-        <header>
-          <h2 id="titulo-viagem">{{ viagem.titulo }}</h2>
-          <p class="detalhes-preco">{{ formatoPreco.format(viagem.preco) }}</p>
-        </header>
+    <div class="detalhes-painel">
+      <header>
+        <h2 id="titulo-viagem">{{ viagem.titulo }}</h2>
+        <p class="detalhes-preco">{{ formatoPreco.format(viagem.preco) }}</p>
+      </header>
 
-        <dl class="detalhes-informacoes">
-          @if (viagem.destino !== viagem.titulo) {
-            <div>
-              <dt><span aria-hidden="true">⌖</span> Destino:</dt>
-              <dd>{{ viagem.destino }}</dd>
-            </div>
-          }
+      <dl class="detalhes-informacoes">
+        @if (viagem.destino !== viagem.titulo) {
+        <div>
+          <dt><span aria-hidden="true">⌖</span> Destino:</dt>
+          <dd>{{ viagem.destino }}</dd>
+        </div>
+        }
 
-          <div>
-            <dt><span aria-hidden="true">▦</span> Duração:</dt>
-            <dd>{{ viagem.duracao }} {{ viagem.duracao === 1 ? 'dia' : 'dias' }}</dd>
-          </div>
+        <div>
+          <dt><span aria-hidden="true">▦</span> Duração:</dt>
+          <dd>{{ viagem.duracao }} {{ viagem.duracao === 1 ? 'dia' : 'dias' }}</dd>
+        </div>
 
-          <div>
-            <dt><span aria-hidden="true">⌂</span> Hospedagem:</dt>
-            <dd>{{ viagem.hospedagem }}</dd>
-          </div>
+        <div>
+          <dt><span aria-hidden="true">⌂</span> Hospedagem:</dt>
+          <dd>{{ viagem.hospedagem }}</dd>
+        </div>
 
-          <div>
-            <dt><span aria-hidden="true">✈︎</span> Transporte:</dt>
-            <dd>{{ viagem.transporte }}</dd>
-          </div>
-        </dl>
+        <div>
+          <dt><span aria-hidden="true">✈︎</span> Transporte:</dt>
+          <dd>{{ viagem.transporte }}</dd>
+        </div>
+      </dl>
 
-        <section class="detalhes-descricao" aria-labelledby="titulo-descricao">
-          <h3 id="titulo-descricao">Descrição</h3>
-          <p>{{ viagem.descricao }}</p>
-        </section>
+      <section class="detalhes-descricao" aria-labelledby="titulo-descricao">
+        <h3 id="titulo-descricao">Descrição</h3>
+        <p>{{ viagem.descricao }}</p>
+      </section>
+      <div class="detalhes-acoes">
+        <p class="detalhes-contato">
+          Para mais informações sobre este pacote, entre em contato pelo e-mail
+          <strong>contato@bonvoy.example</strong>.
+        </p>
+        @if (salvos.podeSalvar()) {
+        <button type="button" (click)="salvos.alternar(viagem.id)">
+          {{ salvos.ids().includes(viagem.id) ? 'Remover dos salvos' : 'Salvar pacote' }}
+        </button>
+        }
       </div>
-    </article>
+    </div>
+  </article>
   }
 </section>

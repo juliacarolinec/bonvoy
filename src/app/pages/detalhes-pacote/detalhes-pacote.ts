@@ -1,7 +1,8 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Pacote } from '../../models/pacote';
 import { PacoteService } from '../../services/pacote.service';
+import { PacotesSalvosService } from '../../services/pacotes-salvos';
 
 @Component({
     selector: 'app-detalhes-pacote',
@@ -13,7 +14,7 @@ export class DetalhesPacoteComponent implements OnInit {
     readonly pacote = signal<Pacote | null>(null);
     readonly carregando = signal(true);
     readonly erro = signal('');
-
+    protected readonly salvos = inject(PacotesSalvosService);
     readonly formatoPreco = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
@@ -23,6 +24,10 @@ export class DetalhesPacoteComponent implements OnInit {
         private route: ActivatedRoute,
         private pacoteService: PacoteService
     ) { }
+
+    protected assuntoConsulta(titulo: string): string {
+        return encodeURIComponent(`Informações sobre o pacote ${titulo}`);
+    }
 
     ngOnInit(): void {
         const id = this.route.snapshot.paramMap.get('id');

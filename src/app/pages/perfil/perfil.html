@@ -1,18 +1,46 @@
 <main class="perfil-pagina">
-  <h1>Meu perfil</h1>
+    <h1>Meu perfil</h1>
 
-  @if (usuario(); as pessoa) {
+    @if (usuario(); as pessoa) {
     <dl>
-      <dt>Nome</dt>
-      <dd>{{ pessoa.nome }}</dd>
+        <dt>Nome</dt>
+        <dd>{{ pessoa.nome }}</dd>
 
-      <dt>E-mail</dt>
-      <dd>{{ pessoa.email }}</dd>
+        <dt>E-mail</dt>
+        <dd>{{ pessoa.email }}</dd>
 
-      <dt>Tipo de conta</dt>
-      <dd>{{ pessoa.tipo === 'equipe' ? 'Equipe BonVoy' : 'Cliente' }}</dd>
+        <dt>Tipo de conta</dt>
+        <dd>{{ pessoa.tipo === 'equipe' ? 'Equipe BonVoy' : 'Cliente' }}</dd>
     </dl>
 
-    <button type="button" (click)="sair()">Sair</button>
-  }
+    @if (pessoa.tipo === 'cliente') {
+    <section aria-labelledby="titulo-salvos">
+        <h2 id="titulo-salvos">Pacotes salvos</h2>
+        @if (carregandoSalvos()) {
+        <p role="status">Carregando pacotes salvos...</p>
+        } @else if (erroSalvos()) {
+        <p role="alert">{{ erroSalvos() }}</p>
+        } @else if (pacotesSalvos().length === 0) {
+        <p>Seus pacotes salvos aparecem aqui.</p>
+        <a routerLink="/pacotes">Explorar pacotes</a>
+        } @else {
+        <ul>
+            @for (pacote of pacotesSalvos(); track pacote.id) {
+            <li class="pacote-salvo">
+                <a [routerLink]="['/pacotes', pacote.id]">{{ pacote.titulo }}</a>
+                <p> {{ formatoPreco.format(pacote.preco) }}
+                    | {{ pacote.duracao }} {{ pacote.duracao === 1 ? 'dia' : 'dias' }}</p>
+                <button class="botao-remover" type="button" (click)="salvos.alternar(pacote.id)"
+                    [attr.aria-label]="'Remover ' + pacote.titulo + ' dos salvos'">
+                    Remover
+                </button>
+            </li>
+            }
+        </ul>
+        }
+    </section>
+    }
+    <br>
+    <button class="botao-sair" type="button" (click)="sair()">Sair</button>
+    }
 </main>

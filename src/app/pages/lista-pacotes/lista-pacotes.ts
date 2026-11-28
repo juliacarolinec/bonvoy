@@ -66,12 +66,16 @@ export class ListaPacotesComponent implements OnInit {
 
         this.pacoteService.excluir(pacote.id).subscribe({
             next: () => {
-                this.pacotes.update((itens)=>
-                 itens.filter((item) => item.id !== pacote.id));
+                this.pacotes.update((itens) =>
+                    itens.filter((item) => item.id !== pacote.id));
             },
             error: () => {
                 this.erro.set('Não foi possível excluir o pacote.');
             }
         });
+    }
+
+    voltarAoTopo(): void {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }

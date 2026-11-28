@@ -239,3 +239,30 @@ h1 {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+.botao-topo {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #355a86;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.botao-topo:hover {
+  background: #27466b;
+}
+
+.botao-topo:focus-visible {
+  outline: 2px solid #355a86;
+  outline-offset: 3px;
+}
